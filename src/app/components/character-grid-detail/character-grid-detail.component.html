@@ -1,0 +1,58 @@
+<h1>Game of Thrones Character Api</h1>
+<h2 class="subtitle"><a href="https://thronesapi.com/swagger/index.html?urls.primaryName=Game%20of%20Thrones%20API%20v2">Swagger Api Documentation</a></h2>
+
+<div class="container-pre-grid">
+  <h2>Character List</h2>
+  <div class="container-grid">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>
+          Id
+        </th>
+        <td *matCellDef="let element">
+          {{ element.id }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>
+          Name
+        </th>
+        <td *matCellDef="let element">
+          {{ element.fullName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>
+          Image
+        </th>
+        <td *matCellDef="let element">
+          <img class="character-image" [src]="element.imageUrl" alt="{{element.fullName}}"/>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewDetails(row.id)"
+          class="clickable-row"></tr>
+    </table>
+
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+  </div>
+</div>
+
+<div class="container-pre-detail">
+  <h2>Character Detail</h2>
+  <div *ngIf="character" class="container-detail">
+    <h2>{{ character.fullName }}</h2>
+    <img [src]="character.imageUrl"/>
+    <p>ID: {{ character.id }}</p>
+    <p>First Name: {{ character.firstName }}</p>
+    <p>Last Name: {{ character.lastName }}</p>
+    <p>Full Name: {{ character.fullName }}</p>
+    <p>Title: {{ character.title }}</p>
+    <p>Family: {{ character.family }}</p>
+    <p>Image: {{ character.image }}</p>
+    <p>Image URL: {{ character.imageUrl }}</p>
+  </div>
+</div>
